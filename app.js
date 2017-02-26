@@ -2,30 +2,28 @@
 var App = () => (
     <div> 
         <h2> My Grocery List</h2>
-        <GroceryList/>
+        <GroceryList items={['pineapples', 'cashews', 'oranges']}/>
     </div>
     );
 
-var GroceryList = () => (
+var GroceryList = (props) => (
     <ul>
-    <GroceryListItem items={['pineapples', 'cashews', 'oranges']}/>
+      {props.items.map(item => 
+        <GroceryListItem item={item} key={item}/>
+        )}
     </ul>
+);
+
+
+class GroceryListItem extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <li>{this.props.item}</li>
     );
-
-var Pineapples = () => (
-    <li> pineapples </li>
-);
-
-var Cashews = () => (
-    <li> cashews </li>
-); 
-
-var GroceryListItem = (props) => (
-    <ul>
-        <li>{props.items[0]}</li>
-        <li>{props.items[1]}</li>
-        <li>{props.items[2]}</li>
-    </ul>
-);
+  }
+}
 
 ReactDOM.render(<App />, document.getElementById('app'));
